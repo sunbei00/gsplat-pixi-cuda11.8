@@ -25,7 +25,6 @@ cuda="11.8"
 [feature.gs.dependencies]
 cuda-version="11.8*"
 pytorch-gpu="==2.0.0"
-pycolmap="*"
 viser="*"
 imageio-ffmpeg="*"
 numpy="<2.0.0"
@@ -43,17 +42,21 @@ splines="*"
 pip="*"
 jaxtyping="*"
 ninja="*"
+scikit-learn="*"
 
 [feature.gs.tasks]
 simple_viewer={cmd="python3 examples/simple_viewer.py", cwd="./gsplat"}
+simple_trainer={cmd="python3 examples/simple_trainer.py", cwd="./gsplat"}
 
 [feature.gs.pypi-dependencies]
 nerfview = { git = "https://github.com/nerfstudio-project/nerfview", rev = "4538024fe0d15fd1a0e4d760f3695fc44ca72787" }
 fused-ssim = {git = "https://github.com/rahul-goel/fused-ssim", rev ="328dc9836f513d00c4b5bc38fe30478b4435cbb5"}
 fused-bilagrid = {git = "https://github.com/harry7557558/fused-bilagrid", rev="90f9788e57d3545e3a033c1038bb9986549632fe"}
+nerfacc = {git = "git+https://github.com/nerfstudio-project/nerfacc"}
+pycolmap={git = "https://github.com/rmbrualla/pycolmap", rev="cc7ea4b7301720ac29287dbe450952511b32125e"}
 
 [feature.gs.pypi-options]
-no-build-isolation = ["fused-bilagrid", "fused-ssim"]
+no-build-isolation = ["fused-bilagrid", "fused-ssim", "nerfacc"]
 
 
 # ===========================================================

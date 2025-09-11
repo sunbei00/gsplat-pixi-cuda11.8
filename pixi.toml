@@ -1,0 +1,73 @@
+[workspace]
+authors = ["sunbei00 <sunbei00@naver.com>"]
+channels = ["conda-forge"]
+name = "gs"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+# ===========================================================
+
+[environments]
+gs = {features=["gs"], no-default-feature=true}
+ros = {features=["ros"], no-default-feature=true}
+
+
+# ===========================================================
+
+[feature.gs]
+channels = ["conda-forge"]
+
+[feature.gs.system-requirements]
+cuda="11.8"
+
+[feature.gs.dependencies]
+cuda-version="11.8*"
+pytorch-gpu="==2.0.0"
+pycolmap="*"
+viser="*"
+imageio-ffmpeg="*"
+numpy="<2.0.0"
+scipy="*"
+tqdm="*"
+torchmetrics="*"
+py-opencv="*"
+tyro=">=0.8.8"
+pillow="*"
+tensorboard="*"
+tensorly="*"
+pyyaml="*"
+matplotlib="*"
+splines="*"
+pip="*"
+jaxtyping="*"
+ninja="*"
+
+[feature.gs.tasks]
+simple_viewer={cmd="python3 examples/simple_viewer.py", cwd="./gsplat"}
+
+[feature.gs.pypi-dependencies]
+nerfview = { git = "https://github.com/nerfstudio-project/nerfview", rev = "4538024fe0d15fd1a0e4d760f3695fc44ca72787" }
+fused-ssim = {git = "https://github.com/rahul-goel/fused-ssim", rev ="328dc9836f513d00c4b5bc38fe30478b4435cbb5"}
+fused-bilagrid = {git = "https://github.com/harry7557558/fused-bilagrid", rev="90f9788e57d3545e3a033c1038bb9986549632fe"}
+
+[feature.gs.pypi-options]
+no-build-isolation = ["fused-bilagrid", "fused-ssim"]
+
+
+# ===========================================================
+
+[feature.ros]
+channels = ["conda-forge", "robostack-staging"]
+
+[feature.ros.dependencies]
+opencv="*"
+ros-humble-desktop-full="*"
+colcon-ros="*"
+gtsam="4.1*"
+pcl="*"
+python = "3.10.*"
+mesalib="*"
+libopengl="*"
+#sudo apt-get install -y mesa-common-dev libglu1-mesa-dev

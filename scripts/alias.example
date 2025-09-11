@@ -1,0 +1,13 @@
+export PATH="/root/.pixi/bin:$PATH"
+alias toml="gedit ~/{pixi_folder}/pixi.toml > /dev/null 2>&1 &"
+alias p="pixi run"
+alias rviz2="/bin/bash -c 'cd ~/{pixi_folder}/ && pixi run -e ros rviz2'"
+alias rviz="/bin/bash -c 'cd ~/{pixi_folder}/ && pixi run -e ros rviz2'"
+alias sb="source ~/.bashrc"
+alias ros2='~/{pixi_folder}/scripts/ros2.sh'
+alias colcon='~/{pixi_folder}/scripts/colcon.sh'
+alias gs='~/{pixi folder}/scripts/gs.sh'
+
+source ~/{pixi_folder}/ros2_ws/install/setup.sh 
+source ~/{pixi_folder}/ros2_ws/install/local_setup.sh
+source ~/{pixi_folder}/.pixi/envs/ros/local_setup.bash

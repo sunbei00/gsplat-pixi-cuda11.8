@@ -93,8 +93,8 @@ class OdometryImageToColmap(Node):
 
         # ====== 설정 (필요 시 파라미터로 바꾸세요) ======
         self.buffer_duration = 3.0                 # 이미지 버퍼 유지 시간 [s]
-        self.translation_threshold = 0.20          # 저장 트리거: 변위 [m]
-        self.rotation_threshold_rad = 0.10         # 저장 트리거: 회전 [rad]
+        self.translation_threshold = 0.8          # 저장 트리거: 변위 [m]
+        self.rotation_threshold_rad = 0.40         # 저장 트리거: 회전 [rad]
         self.match_tolerance = 0.050               # 타임스탬프 매칭 허용오차 [s]
         # body->camera 고정 외부파라미터 (m, quaternion x,y,z,w)
         self.t_bc = np.array([0.0, 0.0, 0.0], dtype=np.float64)
@@ -103,9 +103,10 @@ class OdometryImageToColmap(Node):
         # 경로
         self.ds_root = 'colmap_dataset'
         self.img_dir = os.path.join(self.ds_root, 'images')
-        self.images_txt = os.path.join(self.ds_root, 'images.txt')
-        self.cameras_txt = os.path.join(self.ds_root, 'cameras.txt')
-        self.camera_model = 'OPENCV'  # 'PINHOLE' 또는 'OPENCV'
+        self.ds_join = os.path.join(self.ds_root, 'sparse', 'camera')
+        self.images_txt = os.path.join(self.ds_join, 'images.txt')
+        self.cameras_txt = os.path.join(self.ds_join, 'cameras.txt')
+        self.camera_model = 'pinhole'  # 'PINHOLE' 또는 'OPENCV'
         self.camera_id = 1
 
         # 상태
@@ -120,6 +121,7 @@ class OdometryImageToColmap(Node):
         self.get_logger().info(f"saving path : {os.path.abspath(self.ds_root)}")
 
         os.makedirs(self.img_dir, exist_ok=True)
+        os.makedirs(self.ds_join, exist_ok=True)
         self._prepare_images_txt()
         self._resume_image_counter()
 

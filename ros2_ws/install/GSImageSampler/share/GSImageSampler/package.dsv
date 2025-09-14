@@ -1,0 +1,4 @@
+source;share/GSImageSampler/hook/pythonpath.dsv
+source;share/GSImageSampler/hook/pythonpath.sh
+source;share/GSImageSampler/hook/ament_prefix_path.dsv
+source;share/GSImageSampler/hook/ament_prefix_path.sh

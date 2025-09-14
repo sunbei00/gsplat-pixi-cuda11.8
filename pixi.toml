@@ -43,10 +43,21 @@ pip="*"
 jaxtyping="*"
 ninja="*"
 scikit-learn="*"
+unzip="*"
+torchvision="*"
 
 [feature.gs.tasks]
 simple_viewer={cmd="python3 examples/simple_viewer.py", cwd="./gsplat"}
+gsplat_viewer={cmd="python3 examples/gsplat_viewer.py", cwd="./gsplat"}
+simple_viewer_3dgut={cmd="python3 examples/simple_viewer_3dgut.py", cwd="./gsplat"}
 simple_trainer={cmd="python3 examples/simple_trainer.py", cwd="./gsplat"}
+target_simple_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/simple_trainer.py default --data_dir ~/nas/dataset/data/360_v2/garden --data_factor 8 --result_dir ./results/garden", cwd="./gsplat"}
+image_fitting={cmd="python3 examples/image_fitting.py --height 256 --width 256 --num_points 2000 --save_imgs", cwd="./gsplat"}
+target_image_fitting={cmd="python3 examples/image_fitting.py --img_path PATH_TO_IMG --save_imgs", cwd="./gsplat"}
+download_dataset={cmd="python3 examples/datasets/download_dataset.py", cwd="./gsplat"}
+
+
+# https://docs.gsplat.studio/main/index.html
 
 [feature.gs.pypi-dependencies]
 nerfview = { git = "https://github.com/nerfstudio-project/nerfview", rev = "4538024fe0d15fd1a0e4d760f3695fc44ca72787" }
@@ -74,3 +85,9 @@ python = "3.10.*"
 mesalib="*"
 libopengl="*"
 #sudo apt-get install -y mesa-common-dev libglu1-mesa-dev
+
+[feature.ros.tasks]
+bag_play = {cmd = "ros2 bag play /root/nas/Orchard_DataSet/2025_09_14_isaac_sim_structured_orchard/rosbag2_2025_09_14-06_44_11/"}
+
+
+

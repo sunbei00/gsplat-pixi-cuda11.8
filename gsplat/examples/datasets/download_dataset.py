@@ -48,8 +48,9 @@ dataset_rename_map = {
 
 @dataclass
 class DownloadData:
-    dataset: dataset_names = "mipnerf360"
-    save_dir: Path = Path(os.getcwd() + "/data")
+    dataset: dataset_names = "bilarf_data"
+    #save_dir: Path = Path(os.getcwd() + "/data")
+    save_dir: Path = Path("/root/nas/dataset/data")
 
     def main(self):
         self.save_dir.mkdir(parents=True, exist_ok=True)

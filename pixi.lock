@@ -247,8 +247,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/python-3.9.23-hc30ae73_0_cpython.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-dateutil-2.9.0.post0-pyhe01879c_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.9-8_cp39.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-2.0.0-cuda118py39h06e0762_304.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-gpu-2.0.0-cuda118py39h2b676ad_304.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-2.0.0-cuda112py39h1ecdb5d_304.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-gpu-2.0.0-cuda112py39h398211c_304.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pywavelets-1.6.0-py39hd92a3bb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pyyaml-6.0.2-py39h9399b63_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/qhull-2020.2-h434a139_5.conda
@@ -278,6 +278,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_hd72426e_102.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/toolz-1.0.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/torchmetrics-1.8.2-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/torchvision-0.15.2-cuda112py39h415b9c1_4.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tornado-6.5.2-py39hd399759_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tqdm-4.67.1-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/trimesh-4.7.4-pyh7b2049a_0.conda
@@ -287,6 +288,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/tyro-0.9.28-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h78e105d_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/unicodedata2-16.0.0-py39h8cd3c5a_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/unzip-6.0-hb03c661_4.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/urllib3-2.5.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/viser-1.0.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/wayland-1.24.0-h3e06ad9_0.conda
@@ -7142,15 +7144,15 @@ packages:
   purls: []
   size: 6999
   timestamp: 1752805917390
-- conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-2.0.0-cuda118py39h06e0762_304.conda
-  sha256: 00fe5dfeac329131a1a70dda0dc90d142eb9a5e0f9d5644e8baa620865c30c5c
-  md5: 1d3c4ac1159e0390a40071d37ca3e89a
+- conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-2.0.0-cuda112py39h1ecdb5d_304.conda
+  sha256: 1eb275ab1535209c9f5b25ed24588f6267c72a20060182593e7953e92f3870c0
+  md5: ee78d19ac6dc5c2f01d780bbc26d681d
   depends:
   - __cuda
   - __glibc >=2.17
   - __glibc >=2.17,<3.0.a0
   - _openmp_mutex >=4.5
-  - cudatoolkit >=11.8,<12
+  - cudatoolkit >=11.2,<12
   - cudnn >=8.8.0.121,<9.0a0
   - filelock
   - jinja2
@@ -7178,18 +7180,18 @@ packages:
   license_family: BSD
   purls:
   - pkg:pypi/torch?source=hash-mapping
-  size: 406350873
-  timestamp: 1699093240308
-- conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-gpu-2.0.0-cuda118py39h2b676ad_304.conda
-  sha256: 4cb59200495ad36e97148c5a5716481f05f0110d21f164817e2ed7460857bb1f
-  md5: f6c676e71b42156627e97f5892dc53e7
+  size: 422535968
+  timestamp: 1699027611982
+- conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-gpu-2.0.0-cuda112py39h398211c_304.conda
+  sha256: 3e5805ec6a922601e384557e15c34339ce386a70169d904afd666aab894a9e8e
+  md5: 4f7e5aad5df6cd450924320780fecc61
   depends:
-  - pytorch 2.0.0 cuda118py39h06e0762_304
+  - pytorch 2.0.0 cuda112py39h1ecdb5d_304
   license: BSD-3-Clause
   license_family: BSD
   purls: []
-  size: 19777
-  timestamp: 1699093716150
+  size: 19771
+  timestamp: 1699028102980
 - conda: https://conda.anaconda.org/conda-forge/linux-64/pywavelets-1.6.0-py39hd92a3bb_0.conda
   sha256: e8ac226a400437259034395ef0efe86a58d213da9933d2cdc9df59f16fa85fbe
   md5: 32e26e16f60c568b17a82e3033a4d309
@@ -14363,6 +14365,31 @@ packages:
   - pkg:pypi/torchmetrics?source=hash-mapping
   size: 396413
   timestamp: 1756932778045
+- conda: https://conda.anaconda.org/conda-forge/linux-64/torchvision-0.15.2-cuda112py39h415b9c1_4.conda
+  sha256: dd4cd9ce4a1bbe7b455a601df6374a67958c75adb6aaeaf126ebc5ec0be21b40
+  md5: 39c138b9d2e1878ad60972d4bb1a9b49
+  depends:
+  - __glibc >=2.17
+  - __glibc >=2.17,<3.0.a0
+  - cudatoolkit >=11.2,<12
+  - cudnn >=8.8.0.121,<9.0a0
+  - libgcc-ng >=12
+  - libjpeg-turbo >=3.0.0,<4.0a0
+  - libpng >=1.6.39,<1.7.0a0
+  - libstdcxx-ng >=12
+  - numpy >=1.22.4,<2.0a0
+  - pillow >=5.3.0,!=8.3.0,!=8.3.1
+  - python >=3.9,<3.10.0a0
+  - python_abi 3.9.* *_cp39
+  - pytorch 2.0 cuda112*
+  - pytorch >=2.0.0,<2.1.0a0
+  - requests
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/torchvision?source=hash-mapping
+  size: 11373468
+  timestamp: 1699865530231
 - conda: https://conda.anaconda.org/conda-forge/linux-64/tornado-6.5.2-py39hd399759_0.conda
   sha256: 0471c3d15cda6fae9c3768d210a897a2bc413403e22f38e1a0ae6b276e9f5ae4
   md5: 9546db52eccafee2fa2675653fec04f9
@@ -14541,6 +14568,16 @@ packages:
   - pkg:pypi/unicodedata2?source=hash-mapping
   size: 404490
   timestamp: 1736692618131
+- conda: https://conda.anaconda.org/conda-forge/linux-64/unzip-6.0-hb03c661_4.conda
+  sha256: 489ee14dcc1080e45d07531e89b1c690a8df68ca6a817ade536e6ef4cdc77b9e
+  md5: 7f58240fa4cd5b42607606333cf8b550
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - libgcc >=14
+  license: LicenseRef-BSD-like
+  purls: []
+  size: 146901
+  timestamp: 1754913060109
 - conda: https://conda.anaconda.org/conda-forge/linux-64/urdfdom-3.1.1-h8a9b4ce_0.conda
   sha256: a296e32c9a4b4de3f8abab3537a1a1288abfd98e6d66ce9253f8e96c858b1045
   md5: ed2350abce66f388301ee0a8750cb660

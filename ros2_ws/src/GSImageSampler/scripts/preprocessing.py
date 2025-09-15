@@ -85,8 +85,7 @@ def main():
         run(["colmap", "exhaustive_matcher", "--database_path", str(db_path)])
     elif args.matcher == "sequential":
         run(["colmap", "sequential_matcher",
-             "--database_path", str(db_path),
-             "--image_path", str(image_path)])
+             "--database_path", str(db_path)])
     else:
         run(["colmap", "vocab_tree_matcher", "--database_path", str(db_path)])
 

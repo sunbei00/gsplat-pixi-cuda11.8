@@ -53,10 +53,12 @@ simple_viewer_3dgut={cmd="python3 examples/simple_viewer_3dgut.py", cwd="./gspla
 simple_trainer={cmd="python3 examples/simple_trainer.py", cwd="./gsplat"}
 target_simple_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/simple_trainer.py default --data_dir ~/nas/dataset/GaussianSplatting/360_v2/garden --data_factor 8 --result_dir ./results/garden", cwd="./gsplat"}
 image_fitting={cmd="python3 examples/image_fitting.py --height 256 --width 256 --num_points 2000 --save_imgs", cwd="./gsplat"}
-target_image_fitting={cmd="python3 examples/image_fitting.py --img_path PATH_TO_IMG --save_imgs", cwd="./gsplat"}
+target_image_fitting={cmd="python3 examples/image_fitting.py --img_path /root/share/colmap_dataset/images/image_000001.png --save_imgs", cwd="./gsplat"}
 download_dataset={cmd="python3 examples/datasets/download_dataset.py", cwd="./gsplat"}
 
 target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py default --data_dir ~/share/colmap_dataset --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
+#target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py mcmc --data_dir ~/share/colmap_dataset --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
+
 
 # https://docs.gsplat.studio/main/index.html
 
@@ -91,6 +93,7 @@ libopengl="*"
 
 [feature.ros.tasks]
 bag_play = {cmd = "ros2 bag play /root/nas/Orchard_DataSet/2025_09_14_isaac_sim_structured_orchard/rosbag2_2025_09_14-06_44_11/"}
-preprocessing = {cmd = "python3 preprocessing.py --data_root /root/share/colmap_dataset --matcher exhaustive --dump_txt", cwd = "ros2_ws/src/GSImageSampler/scripts"}
-
+#preprocessing = {cmd = "python3 preprocessing.py --data_root /root/share/colmap_dataset --matcher exhaustive --dump_txt", cwd = "ros2_ws/src/GSImageSampler/scripts"}
+preprocessing = {cmd = "python3 preprocessing.py --data_root /root/share/colmap_dataset --matcher sequential --dump_txt", cwd = "ros2_ws/src/GSImageSampler/scripts"}
+viewer = {cmd = "colmap gui"}
 

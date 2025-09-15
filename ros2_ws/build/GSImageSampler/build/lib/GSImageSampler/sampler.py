@@ -93,8 +93,8 @@ class OdometryImageToColmap(Node):
 
         # ====== 설정 (필요 시 파라미터로 바꾸세요) ======
         self.buffer_duration = 3.0                 # 이미지 버퍼 유지 시간 [s]
-        self.translation_threshold = 0.8          # 저장 트리거: 변위 [m]
-        self.rotation_threshold_rad = 0.40         # 저장 트리거: 회전 [rad]
+        self.translation_threshold = 0.4          # 저장 트리거: 변위 [m]
+        self.rotation_threshold_rad = 0.30         # 저장 트리거: 회전 [rad]
         self.match_tolerance = 0.050               # 타임스탬프 매칭 허용오차 [s]
         # body->camera 고정 외부파라미터 (m, quaternion x,y,z,w)
         self.t_bc = np.array([0.0, 0.0, 0.0], dtype=np.float64)
@@ -254,12 +254,12 @@ class OdometryImageToColmap(Node):
     def odom_cb(self, msg: Odometry):
         try:
             # body in world
-            x = float(msg.pose.pose.position.x)
-            y = float(msg.pose.pose.position.y)
-            z = float(msg.pose.pose.position.z)
-            qx = float(msg.pose.pose.orientation.x)
-            qy = float(msg.pose.pose.orientation.y)
-            qz = float(msg.pose.pose.orientation.z)
+            x = -1 * float(msg.pose.pose.position.y)
+            y = -1 * float(msg.pose.pose.position.z) 
+            z = float(msg.pose.pose.position.x)
+            qx = -1 * float(msg.pose.pose.orientation.y)
+            qy = -1 * float(msg.pose.pose.orientation.z)
+            qz = float(msg.pose.pose.orientation.x)
             qw = float(msg.pose.pose.orientation.w)
             self.get_logger().info(f"It recieves Odom Topic!")
 
@@ -324,18 +324,41 @@ class OdometryImageToColmap(Node):
         if abs(skew) > 0:
             self.get_logger().info(f"[Match] Use image t={t_img:.6f} (skew {skew*1000:.1f} ms)")
 
-        # --- COLMAP pose(world->camera) 계산 ---
         q_bc_xyzw = normalize_quat_xyzw(self.q_bc)
+
+        # q_bc가 body->camera_link(ROS)일 때: optical로 변환
         R_bc = quat_to_R(q_bc_xyzw[0], q_bc_xyzw[1], q_bc_xyzw[2], q_bc_xyzw[3])
-        t_bc = self.t_bc
+        
+        
+        def rotx(rad: float) -> np.ndarray:
+            c, s = math.cos(rad), math.sin(rad)
+            return np.array([[1, 0, 0],
+                             [0, c, -s],
+                             [0, s,  c]], dtype=np.float64)
+
+        def roty(rad: float) -> np.ndarray:
+            c, s = math.cos(rad), math.sin(rad)
+            return np.array([[ c, 0, s],
+                             [ 0, 1, 0],
+                             [-s, 0, c]], dtype=np.float64)
+
+        def rotz(rad: float) -> np.ndarray:
+            c, s = math.cos(rad), math.sin(rad)
+            return np.array([[ c, -s, 0],
+                             [ s,  c, 0],
+                             [ 0,  0, 1]], dtype=np.float64)
+        #R_bc = R_bc @ rotz(math.pi/2)
+
+        t_bc = self.t_bc  # body 좌표계에서의 카메라 중심 위치이므로 그대로 사용
 
         # camera center in world
-        C_w = R_wb @ t_bc + t_wb
-        # R_cw = (R_wb * R_bc)^T
+        C_w = (R_wb @ t_bc + t_wb)
+        #C_w = (R_wb @ t_bc + t_wb)
         R_cw = (R_wb @ R_bc).T
+        #R_cw = ( R_wb @ R_bc).T
         # t_cw = -R_cw * C_w
         t_cw = - R_cw @ C_w
-
+       
         q_cw_xyzw = R_to_quat(R_cw)  # normalized
         qw, qx, qy, qz = float(q_cw_xyzw[3]), float(q_cw_xyzw[0]), float(q_cw_xyzw[1]), float(q_cw_xyzw[2])
 

@@ -159,12 +159,12 @@ def image_path_to_tensor(image_path: Path):
 
 
 def main(
-    height: int = 256,
-    width: int = 256,
+    height: int = 480,
+    width: int = 640,
     num_points: int = 100000,
     save_imgs: bool = True,
     img_path: Optional[Path] = None,
-    iterations: int = 1000,
+    iterations: int = 10000,
     lr: float = 0.01,
     model_type: Literal["3dgs", "2dgs"] = "3dgs",
 ) -> None:

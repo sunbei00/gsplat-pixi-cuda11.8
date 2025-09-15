@@ -45,10 +45,10 @@
 
 
     # IMU Settings
-    imuAccNoise: 0.44809037232096927 
-    imuGyrNoise: 0.12547435469175758  
-    imuAccBiasN: 0.06801381430165347  
-    imuGyrBiasN: 0.009574728104721663  
+    imuAccNoise: 0.003151148885427242
+    imuGyrNoise: 0.001193787804118678 
+    imuAccBiasN: 6.906254379449776e-05 
+    imuGyrBiasN: 1.4766571227424171e-05
     imuGravity: 9.80511
     imuGravityAccelAdjustment: true # Gravity-based acceleration compensation # it needs 8-Axis or 9-Axis IMU
     imuRate: 120.0
@@ -62,8 +62,8 @@
     useImuRPYWeight : false # need 8-Axis or 9-Axis IMU
     imuRPYWeight: 0.1
 
-#    extrinsicTrans:  [-0.3212, 0.0, -0.7895]
-    extrinsicTrans:  [0.13, 0.0, -0.13]
+    extrinsicTrans:  [-0.3212, 0.0, -0.7895]
+#    extrinsicTrans:  [0.13, 0.0, -0.13]
     extrinsicRot:     [1.0, 0.0, 0.0,
                        0.0, 1.0, 0.0,
                        0.0, 0.0, 1.0 ]
@@ -80,9 +80,9 @@
     surfFeatureMinValidNum: 100
 
     # voxel filter paprams
-    odometrySurfLeafSize: 0.4                    # default: 0.4 - outdoor, 0.2 - indoor
-    mappingCornerLeafSize: 0.2                    # default: 0.2 - outdoor, 0.1 - indoor
-    mappingSurfLeafSize: 0.4                      # default: 0.4 - outdoor, 0.2 - indoor
+    odometrySurfLeafSize: 0.3                    # default: 0.4 - outdoor, 0.2 - indoor
+    mappingCornerLeafSize: 0.15                    # default: 0.2 - outdoor, 0.1 - indoor
+    mappingSurfLeafSize: 0.3                      # default: 0.4 - outdoor, 0.2 - indoor
 
     # CPU Params
     numberOfCores: 2                              # number of cores for mapping optimization

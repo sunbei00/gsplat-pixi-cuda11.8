@@ -56,8 +56,10 @@ image_fitting={cmd="python3 examples/image_fitting.py --height 256 --width 256 -
 target_image_fitting={cmd="python3 examples/image_fitting.py --img_path /root/share/colmap_dataset/images/image_000001.png --save_imgs", cwd="./gsplat"}
 download_dataset={cmd="python3 examples/datasets/download_dataset.py", cwd="./gsplat"}
 
-target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py default --data_dir ~/share/colmap_dataset --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
+#target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py default --data_dir ~/share/colmap_dataset --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
 #target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py mcmc --data_dir ~/share/colmap_dataset --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
+
+target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py mcmc --data_dir ~/share/colmap_dataset --sh_degree 5 --batch_size 5 --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
 
 
 # https://docs.gsplat.studio/main/index.html

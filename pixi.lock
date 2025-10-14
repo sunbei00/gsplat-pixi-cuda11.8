@@ -993,6 +993,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_h4845f30_101.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/toml-0.10.2-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tomli-2.2.1-pyhe01879c_2.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/transforms3d-0.4.2-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing-extensions-4.15.0-h396c80c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.15.0-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025b-h78e105d_0.conda
@@ -14415,6 +14416,16 @@ packages:
   - pkg:pypi/tqdm?source=hash-mapping
   size: 89498
   timestamp: 1735661472632
+- conda: https://conda.anaconda.org/conda-forge/noarch/transforms3d-0.4.2-pyhd8ed1ab_1.conda
+  sha256: 2e018673c5e48d001e7e3e921567983ec322d732b6b389e7b534cc300d19c0c8
+  md5: 711ff5140ada9166b4b4d914a0f2fe0a
+  depends:
+  - numpy >=1.15
+  - python >=3.9
+  license: BSD-2-Clause
+  license_family: BSD
+  size: 2690384
+  timestamp: 1734511238605
 - conda: https://conda.anaconda.org/conda-forge/noarch/trimesh-4.7.4-pyh7b2049a_0.conda
   sha256: 20ae5ff71469f06f529a8addf6bd1e61d023956a1fc4315a32b8fdf192078a0e
   md5: 3e6e59e7369dee74dac413c5418a200e

@@ -59,7 +59,8 @@ download_dataset={cmd="python3 examples/datasets/download_dataset.py", cwd="./gs
 #target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py default --data_dir ~/share/colmap_dataset --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
 #target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py mcmc --data_dir ~/share/colmap_dataset --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
 
-target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py mcmc --data_dir ~/share/colmap_dataset --sh_degree 5 --batch_size 5 --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
+target_custom_trainer={cmd="CUDA_VISIBLE_DEVICES=0 python3 examples/custom_trainer.py default --data_dir ~/share/colmap_dataset --sh_degree 3 --batch_size 5 --data_factor 1 --result_dir ./results/custom", cwd="./gsplat"}
+target_view={cmd="CUDA_VISIBLE_DEVICES=0 python3 -m simple_viewer --ckpt results/custom/ckpts/ckpt_6999_rank0.pt --output_dir results/custom/ --port 8082"}
 
 
 # https://docs.gsplat.studio/main/index.html
@@ -93,9 +94,13 @@ mesalib="*"
 libopengl="*"
 #sudo apt-get install -y mesa-common-dev libglu1-mesa-dev
 
+
+transforms3d="*"
+
 [feature.ros.tasks]
 bag_play = {cmd = "ros2 bag play /root/nas/Orchard_DataSet/2025_09_14_isaac_sim_structured_orchard/rosbag2_2025_09_14-06_44_11/"}
 #preprocessing = {cmd = "python3 preprocessing.py --data_root /root/share/colmap_dataset --matcher exhaustive --dump_txt", cwd = "ros2_ws/src/GSImageSampler/scripts"}
 preprocessing = {cmd = "python3 preprocessing.py --data_root /root/share/colmap_dataset --matcher sequential --dump_txt", cwd = "ros2_ws/src/GSImageSampler/scripts"}
 viewer = {cmd = "colmap gui"}
+build = {cmd = "colcon build", cwd = "ros2_ws/"}
 

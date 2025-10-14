@@ -174,7 +174,7 @@ rosidl_generator_c/lio_sam/msg/cloud_info.h: /root/code/.pixi/envs/ros/share/geo
 rosidl_generator_c/lio_sam/msg/cloud_info.h: /root/code/.pixi/envs/ros/share/geometry_msgs/msg/Wrench.idl
 rosidl_generator_c/lio_sam/msg/cloud_info.h: /root/code/.pixi/envs/ros/share/geometry_msgs/msg/WrenchStamped.idl
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/root/code/ros2_ws/build/lio_sam/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C code for ROS interfaces"
-	/root/code/.pixi/envs/ros/bin/python3 /root/code/.pixi/envs/ros/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c --generator-arguments-file /root/code/ros2_ws/build/lio_sam/rosidl_generator_c__arguments.json
+	/root/code/.pixi/envs/ros/bin/python3.10 /root/code/.pixi/envs/ros/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c --generator-arguments-file /root/code/ros2_ws/build/lio_sam/rosidl_generator_c__arguments.json
 
 rosidl_generator_c/lio_sam/msg/detail/cloud_info__functions.h: rosidl_generator_c/lio_sam/msg/cloud_info.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/lio_sam/msg/detail/cloud_info__functions.h

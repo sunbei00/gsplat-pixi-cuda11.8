@@ -67,7 +67,7 @@ include CMakeFiles/ament_cmake_python_build_lio_sam_egg.dir/compiler_depend.make
 include CMakeFiles/ament_cmake_python_build_lio_sam_egg.dir/progress.make
 
 CMakeFiles/ament_cmake_python_build_lio_sam_egg:
-	cd /root/code/ros2_ws/build/lio_sam/ament_cmake_python/lio_sam && /root/code/.pixi/envs/ros/bin/python3 setup.py egg_info
+	cd /root/code/ros2_ws/build/lio_sam/ament_cmake_python/lio_sam && /root/code/.pixi/envs/ros/bin/python3.10 setup.py egg_info
 
 ament_cmake_python_build_lio_sam_egg: CMakeFiles/ament_cmake_python_build_lio_sam_egg
 ament_cmake_python_build_lio_sam_egg: CMakeFiles/ament_cmake_python_build_lio_sam_egg.dir/build.make

@@ -169,7 +169,7 @@ rosidl_typesupport_introspection_cpp/lio_sam/msg/detail/cloud_info__rosidl_types
 rosidl_typesupport_introspection_cpp/lio_sam/msg/detail/cloud_info__rosidl_typesupport_introspection_cpp.hpp: /root/code/.pixi/envs/ros/share/geometry_msgs/msg/Wrench.idl
 rosidl_typesupport_introspection_cpp/lio_sam/msg/detail/cloud_info__rosidl_typesupport_introspection_cpp.hpp: /root/code/.pixi/envs/ros/share/geometry_msgs/msg/WrenchStamped.idl
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/root/code/ros2_ws/build/lio_sam/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ introspection for ROS interfaces"
-	/root/code/.pixi/envs/ros/bin/python3 /root/code/.pixi/envs/ros/lib/rosidl_typesupport_introspection_cpp/rosidl_typesupport_introspection_cpp --generator-arguments-file /root/code/ros2_ws/build/lio_sam/rosidl_typesupport_introspection_cpp__arguments.json
+	/root/code/.pixi/envs/ros/bin/python3.10 /root/code/.pixi/envs/ros/lib/rosidl_typesupport_introspection_cpp/rosidl_typesupport_introspection_cpp --generator-arguments-file /root/code/ros2_ws/build/lio_sam/rosidl_typesupport_introspection_cpp__arguments.json
 
 rosidl_typesupport_introspection_cpp/lio_sam/srv/detail/save_map__rosidl_typesupport_introspection_cpp.hpp: rosidl_typesupport_introspection_cpp/lio_sam/msg/detail/cloud_info__rosidl_typesupport_introspection_cpp.hpp
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_cpp/lio_sam/srv/detail/save_map__rosidl_typesupport_introspection_cpp.hpp

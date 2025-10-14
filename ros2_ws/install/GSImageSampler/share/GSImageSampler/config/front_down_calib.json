@@ -1,0 +1,81 @@
+{
+  "image_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "board": {
+    "cols": 6,
+    "rows": 5,
+    "square_size_m": 0.08,
+    "unit_input": "mm"
+  },
+  "camera_matrix": [
+    [
+      1176.1165514877123,
+      0.0,
+      1036.700890888982
+    ],
+    [
+      0.0,
+      1178.4913281429685,
+      461.826338197688
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "dist_coeffs": [
+    -0.39800500347582274,
+    0.2548620845177681,
+    -0.0025698427474674193,
+    -0.0014419028607103378,
+    -0.12405369455795687
+  ],
+  "rms": 0.1850665830213177,
+  "per_view_error": [
+    0.034136003280366506,
+    0.7071903590062499,
+    0.0255253145807011,
+    0.05658524330112058,
+    0.0329311265049033,
+    0.042533612485495725,
+    0.04705800589839408,
+    0.03982725794226552,
+    0.03839507179088035,
+    0.04113729776705398,
+    0.18079736529742335,
+    0.07814447337747533,
+    0.03406296148511452,
+    0.05282070409187251,
+    0.06545097129645804,
+    0.090697920718678,
+    0.10950702005385247
+  ],
+  "used_images": [
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989342502755765_000052.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989343787517935_000071.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989344037646737_000075.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989348278493196_000139.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989356328704896_000259.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989360625648233_000323.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989360954413173_000328.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989361426220214_000335.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989362975018549_000358.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989363320007690_000363.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989364110816065_000375.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989365240622940_000392.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989385121324592_000689.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989385258197678_000691.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989389540873486_000756.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989395340396828_000843.png",
+    "/root/nas/Orchard_DataSet/camera_calibration/front_down/selected/1757989395474749728_000845.png"
+  ],
+  "flags": 0,
+  "use_rational": false,
+  "criteria": {
+    "max_iter": 100,
+    "eps": 1e-06
+  }
+}

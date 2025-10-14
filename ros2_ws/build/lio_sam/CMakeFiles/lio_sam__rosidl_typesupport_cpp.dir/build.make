@@ -167,7 +167,7 @@ rosidl_typesupport_cpp/lio_sam/msg/cloud_info__type_support.cpp: /root/code/.pix
 rosidl_typesupport_cpp/lio_sam/msg/cloud_info__type_support.cpp: /root/code/.pixi/envs/ros/share/geometry_msgs/msg/Wrench.idl
 rosidl_typesupport_cpp/lio_sam/msg/cloud_info__type_support.cpp: /root/code/.pixi/envs/ros/share/geometry_msgs/msg/WrenchStamped.idl
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/root/code/ros2_ws/build/lio_sam/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ type support dispatch for ROS interfaces"
-	/root/code/.pixi/envs/ros/bin/python3 /root/code/.pixi/envs/ros/lib/rosidl_typesupport_cpp/rosidl_typesupport_cpp --generator-arguments-file /root/code/ros2_ws/build/lio_sam/rosidl_typesupport_cpp__arguments.json --typesupports rosidl_typesupport_fastrtps_cpp rosidl_typesupport_introspection_cpp
+	/root/code/.pixi/envs/ros/bin/python3.10 /root/code/.pixi/envs/ros/lib/rosidl_typesupport_cpp/rosidl_typesupport_cpp --generator-arguments-file /root/code/ros2_ws/build/lio_sam/rosidl_typesupport_cpp__arguments.json --typesupports rosidl_typesupport_fastrtps_cpp rosidl_typesupport_introspection_cpp
 
 rosidl_typesupport_cpp/lio_sam/srv/save_map__type_support.cpp: rosidl_typesupport_cpp/lio_sam/msg/cloud_info__type_support.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_cpp/lio_sam/srv/save_map__type_support.cpp

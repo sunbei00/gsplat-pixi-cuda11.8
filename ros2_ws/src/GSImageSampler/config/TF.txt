@@ -1,0 +1,91 @@
+
+
+ros2 run tf2_ros tf2_echo src target
+T_{src}{target}
+
+
+ros2 run tf2_ros tf2_echo lidar_link front_camera_mount_link
+
+At time 0.0
+- Translation: [0.099, 0.000, -0.180]
+- Rotation: in Quaternion [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.099
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000 -0.180
+  0.000  0.000  0.000  1.000
+
+ros2 run tf2_ros tf2_echo lidar_link front_camera_mount_link
+
+- Translation: [0.099, 0.000, -0.180]
+- Rotation: in Quaternion [0.000, 0.000, 0.000, 1.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 0.000]
+- Rotation: in RPY (degree) [0.000, -0.000, 0.000]
+- Matrix:
+  1.000  0.000  0.000  0.099
+  0.000  1.000  0.000  0.000
+  0.000  0.000  1.000 -0.180
+  0.000  0.000  0.000  1.000
+
+
+ros2 run tf2_ros tf2_echo lidar_link left_camera_mount_link
+
+At time 0.0
+- Translation: [-0.701, 0.403, -0.180]
+- Rotation: in Quaternion [0.000, 0.000, 0.707, 0.707]
+- Rotation: in RPY (radian) [0.000, -0.000, 1.571]
+- Rotation: in RPY (degree) [0.000, -0.000, 90.000]
+- Matrix:
+  0.000 -1.000  0.000 -0.701
+  1.000  0.000  0.000  0.403
+  0.000  0.000  1.000 -0.180
+  0.000  0.000  0.000  1.000
+
+
+ros2 run tf2_ros tf2_echo lidar_link rear_camera_mount_link
+
+At time 0.0
+- Translation: [-1.501, 0.000, -0.180]
+- Rotation: in Quaternion [0.000, 0.000, 1.000, 0.000]
+- Rotation: in RPY (radian) [0.000, -0.000, 3.142]
+- Rotation: in RPY (degree) [0.000, -0.000, 180.000]
+- Matrix:
+ -1.000 -0.000  0.000 -1.501
+  0.000 -1.000  0.000  0.000
+  0.000  0.000  1.000 -0.180
+  0.000  0.000  0.000  1.000
+
+
+ros2 run tf2_ros tf2_echo lidar_link right_camera_mount_link
+
+At time 0.0
+- Translation: [-0.701, -0.403, -0.180]
+- Rotation: in Quaternion [0.000, 0.000, -0.707, 0.707]
+- Rotation: in RPY (radian) [0.000, 0.000, -1.571]
+- Rotation: in RPY (degree) [0.000, 0.000, -90.000]
+- Matrix:
+  0.000  1.000  0.000 -0.701
+ -1.000  0.000 -0.000 -0.403
+ -0.000  0.000  1.000 -0.180
+  0.000  0.000  0.000  1.000
+
+
+
+ros2 run tf2_ros tf2_echo lidar_link camera_color_frame
+
+At time 0.0
+- Translation: [0.072, 0.032, -0.075]
+- Rotation: in Quaternion [-0.001, 0.003, 0.001, 1.000]
+- Rotation: in RPY (radian) [-0.001, 0.005, 0.003]
+- Rotation: in RPY (degree) [-0.078, 0.298, 0.153]
+- Matrix:
+  1.000 -0.003  0.005  0.072
+  0.003  1.000  0.001  0.032
+ -0.005 -0.001  1.000 -0.075
+  0.000  0.000  0.000  1.000
+
+
+
+

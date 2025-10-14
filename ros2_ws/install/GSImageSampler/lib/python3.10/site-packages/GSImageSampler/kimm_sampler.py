@@ -3,11 +3,16 @@
 """
 GSImageSampler (no-args): ROS2 → COLMAP 덤프 + CameraInfo 퍼블리셔 (멀티카메라, 자동 config 사용)
 
-- ament index로 <pkg>/share/<pkg>/config 폴더를 자동 검색
-- 다음 파일명을 자동 로드: back_calib.json, front_up_calib.json, right_calib.json, front_down_calib.json, left_calib.json
-- CameraInfo 퍼블리시(TRANSIENT_LOCAL) + Odometry/Image 트리거 기반 COLMAP 파일(images.txt, cameras.txt)
-- 재시작 시 images.txt에서 IMAGE_ID 이어받기
-- 카메라별 고정 외부파라미터 T_bc (body->camera) 반영
+변경 사항(요구 반영):
+- CameraInfo 수신 전엔 어떤 임시 K도 쓰지 않음(옵션)
+- CameraInfo에 k1,k2,p1,p2가 있으면 저장 시 undistortion 적용(토글 가능)
+- cameras.txt에는 기본적으로 왜곡계수(k1,k2,p1,p2)를 기록하지 않음(토글 가능)
+- 두 기능 모두 전역 플래그로 ON/OFF 가능
+
+전역 플래그:
+  SAVE_UNDISTORTED = True          # 왜곡계수 존재 시 undistort 해서 저장
+  INCLUDE_DIST_IN_CAMERAS = False  # cameras.txt에 k1,k2,p1,p2 기록 여부
+  REQUIRE_CAMINFO_BEFORE_WRITE = True  # CameraInfo 오기 전에는 저장/기록 금지
 
 실행:
   ros2 run GSImageSampler kimm_sampler
@@ -34,6 +39,11 @@ from sensor_msgs.msg import Image, CameraInfo
 from cv_bridge import CvBridge
 from datetime import datetime, timezone, timedelta
 KST = timezone(timedelta(hours=9))
+
+# -------------------- 전역 플래그 --------------------
+SAVE_UNDISTORTED = True           # 왜곡계수가 있으면 undistort 후 저장
+INCLUDE_DIST_IN_CAMERAS = False   # cameras.txt에 k1,k2,p1,p2 기록 여부
+REQUIRE_CAMINFO_BEFORE_WRITE = True  # CameraInfo 이전엔 저장/기록 금지
 
 
 # -------------------- 경로/타임스탬프 --------------------
@@ -149,7 +159,6 @@ class MultiCamOdometryToColmap(Node):
         self.config_root = os.path.join(pkg_share, config_dir)
 
         # ===== 자동 로드 대상 파일명(고정) + 토픽 매핑(고정) =====
-        # 필요하면 이 테이블만 수정
         name_topic_pairs = [
             ("back",  "/camera0/image_raw", "/back/camera_info",  "back_calib.json", [-1.5, 0.0, -0.18], [0.0, 0.0, 1.0, 0.0]),
             ("fup",   "/camera/camera/color/image_raw", "/fup/camera_info", "front_up_calib.json", [0.072, 0.032, -0.075], [0.0, 0.0, 0.0, 1.0]),
@@ -157,6 +166,7 @@ class MultiCamOdometryToColmap(Node):
             ("left",  "/camera2/image_raw", "/left/camera_info",  "left_calib.json", [-0.701, 0.403, 0.180], [0.0, 0.0, 0.707, 0.707]),
             ("right", "/camera1/image_raw", "/right/camera_info", "right_calib.json", [-0.7, -0.403, -0.18], [0.0, 0.0, -0.707, 0.707]),
         ]
+
         # ===== 저장 트리거/버퍼 =====
         self.buffer_duration = 1.5          # 각 카메라 이미지 버퍼 유지 [s]
         self.translation_threshold = 0.4     # 저장 트리거: 변위 [m]
@@ -184,13 +194,15 @@ class MultiCamOdometryToColmap(Node):
                 frame_id=name,
             ))
 
-
         # ===== 상태 =====
         self.bridge = CvBridge()
         self.img_buffers: Dict[str, deque] = {c['name']: deque() for c in self.cams}  # (t, img)
-        self.cam_models: Dict[str, str] = {c['name']: 'PINHOLE' for c in self.cams}   # 또는 'OPENCV'
+
+        # 카메라 파라미터/리매핑 캐시
+        # 각 항목: {'K':..., 'dist':..., 'width':..., 'height':..., 'K_used':..., 'undistort':bool, 'map1':..., 'map2':...}
+        self.cam_param: Dict[str, Dict[str, Any]] = {c['name']: {} for c in self.cams}
         self.cam_has_written: Dict[str, bool] = {c['name']: False for c in self.cams}
-        self.cam_size_intr: Dict[str, Dict[str, Any]] = {c['name']: {} for c in self.cams}  # width,height,K,dist
+
         self.last_saved_odom = None
         self.image_id_counter = 1
         self.file_lock = threading.Lock()
@@ -226,12 +238,7 @@ class MultiCamOdometryToColmap(Node):
             if os.path.isfile(c['calib_json']):
                 try:
                     msg = load_calib_json_to_camerainfo(c['calib_json'], frame_id=c.get('frame_id', c['name']))
-                    self.caminfo_msgs[c['name']] = msg
-                    # 내부 intrinsics 캐시 → cameras.txt 보장
-                    K = np.array(msg.k, dtype=np.float64).reshape(3,3)
-                    dist = np.array(msg.d, dtype=np.float64)
-                    self.cam_size_intr[c['name']] = dict(K=K, dist=dist, width=int(msg.width), height=int(msg.height))
-                    self.cam_models[c['name']] = 'OPENCV' if (len(msg.d) >= 4) else 'PINHOLE'
+                    self._ingest_caminfo(c['name'], msg)  # 파라미터 캐시 및 cameras.txt 반영
                     msg.header.stamp = self.get_clock().now().to_msg()
                     pub.publish(msg)
                     self.get_logger().info(f"[CameraInfo] Published from JSON for {c['name']}: {c['calib_json']}")
@@ -304,15 +311,17 @@ class MultiCamOdometryToColmap(Node):
 
     def _append_camera_line_once(self, cam_name: str, camera_id: int,
                                  width: int, height: int,
-                                 model: str,
-                                 fx: float, fy: float, cx: float, cy: float,
-                                 dist: Optional[np.ndarray]):
+                                 K_used: np.ndarray,
+                                 dist_orig: Optional[np.ndarray]):
         """카메라별 1회만 cameras.txt에 라인 추가 (중복 방지).
-        OPENCV 모델에는 k1,k2,p1,p2 (4개)만 기록. (k3는 무시)
+        - SAVE_UNDISTORTED=True 이면 PINHOLE + K_used 기록 (dist 무시)
+        - SAVE_UNDISTORTED=False 이고 INCLUDE_DIST_IN_CAMERAS=True 이면 OPENCV + k1,k2,p1,p2 기록
+        - 그 외는 PINHOLE 기록
         """
         if self.cam_has_written[cam_name]:
             return
 
+        # 이미 camera_id 존재하는지 검사
         exists = False
         try:
             with open(self.cameras_txt, 'r') as f:
@@ -330,22 +339,30 @@ class MultiCamOdometryToColmap(Node):
         except FileNotFoundError:
             pass
 
+        fx = float(K_used[0, 0]); fy = float(K_used[1, 1])
+        cx = float(K_used[0, 2]); cy = float(K_used[1, 2])
+
+        write_model_opencv = (not SAVE_UNDISTORTED) and INCLUDE_DIST_IN_CAMERAS \
+                             and (dist_orig is not None) and (len(dist_orig) >= 4)
+
         with self.file_lock:
             with open(self.cameras_txt, 'a') as f:
                 if not exists:
-                    if model.upper() == 'OPENCV' and dist is not None and len(dist) >= 4:
-                        k1, k2, p1, p2 = float(dist[0]), float(dist[1]), float(dist[2]), float(dist[3])
+                    if write_model_opencv:
+                        k1, k2, p1, p2 = float(dist_orig[0]), float(dist_orig[1]), float(dist_orig[2]), float(dist_orig[3])
                         f.write(f"{camera_id} OPENCV {width} {height} "
                                 f"{fx} {fy} {cx} {cy} {k1} {k2} {p1} {p2}\n")
+                        model_written = 'OPENCV'
                     else:
                         f.write(f"{camera_id} PINHOLE {width} {height} {fx} {fy} {cx} {cy}\n")
+                        model_written = 'PINHOLE'
                     f.flush()
                     os.fsync(f.fileno())
 
         self.cam_has_written[cam_name] = True
-        self.get_logger().info(f'[COLMAP] cameras.txt appended: {cam_name} (ID={camera_id}, model={model})')
+        self.get_logger().info(f'[COLMAP] cameras.txt appended: {cam_name} (ID={camera_id}, model={model_written})')
 
-    # -------------------- CameraInfo 퍼블리셔 보조 --------------------
+    # -------------------- CameraInfo 처리/퍼블리시 보조 --------------------
 
     def _republish_caminfo_if_any(self):
         now = self.get_clock().now().to_msg()
@@ -353,29 +370,48 @@ class MultiCamOdometryToColmap(Node):
             msg.header.stamp = now
             self.caminfo_pubs[name].publish(msg)
 
+    def _compute_rectify_cache(self, cam_name: str, K: np.ndarray, dist: Optional[np.ndarray],
+                               width: int, height: int) -> Dict[str, Any]:
+        """왜곡/비왜곡 저장을 위한 파라미터/맵 생성 및 반환."""
+        ret: Dict[str, Any] = {'K': K, 'dist': dist, 'width': width, 'height': height}
+
+        use_undistort = SAVE_UNDISTORTED and (dist is not None) and (len(dist) >= 4)
+        if use_undistort:
+            # new camera matrix (alpha=0, 원영상 크기 유지)
+            Knew, _ = cv2.getOptimalNewCameraMatrix(K, dist, (width, height), alpha=0, newImgSize=(width, height))
+            map1, map2 = cv2.initUndistortRectifyMap(K, dist, R=None, newCameraMatrix=Knew,
+                                                     size=(width, height), m1type=cv2.CV_16SC2)
+            ret.update({'K_used': Knew, 'undistort': True, 'map1': map1, 'map2': map2})
+        else:
+            ret.update({'K_used': K, 'undistort': False, 'map1': None, 'map2': None})
+
+        return ret
+
+    def _ingest_caminfo(self, cam_name: str, msg: CameraInfo):
+        """CameraInfo를 수신/로드했을 때 내부 캐시 세팅과 cameras.txt 1회 기록 처리."""
+        try:
+            K = np.array(msg.k, dtype=np.float64).reshape(3, 3)
+            dist = np.array(msg.d, dtype=np.float64) if msg.d else None
+            width = int(msg.width); height = int(msg.height)
+
+            cache = self._compute_rectify_cache(cam_name, K, dist, width, height)
+            self.cam_param[cam_name] = cache
+            self.caminfo_msgs[cam_name] = msg  # republish용 캐시
+
+            camera_id = next(c['camera_id'] for c in self.cams if c['name'] == cam_name)
+            self._append_camera_line_once(
+                cam_name, camera_id, width, height,
+                cache['K_used'],
+                dist
+            )
+        except Exception as e:
+            self.get_logger().warning(f'[{cam_name}][CameraInfo] parse failed: {e}')
+
     # -------------------- 콜백 바인더 --------------------
 
     def _make_caminfo_cb(self, cam_name: str):
         def caminfo_cb(msg: CameraInfo):
-            try:
-                K = np.array(msg.k, dtype=np.float64).reshape(3, 3)
-                dist = np.array(msg.d, dtype=np.float64) if msg.d else None
-                width = int(msg.width)
-                height = int(msg.height)
-
-                self.cam_size_intr[cam_name] = dict(K=K, dist=dist, width=width, height=height)
-                model = 'OPENCV' if (dist is not None and len(dist) >= 4) else 'PINHOLE'
-                self.cam_models[cam_name] = model
-
-                camera_id = next(c['camera_id'] for c in self.cams if c['name'] == cam_name)
-                fx = float(K[0, 0]) if K is not None else 500.0
-                fy = float(K[1, 1]) if K is not None else 500.0
-                cx = float(K[0, 2]) if K is not None else (width * 0.5)
-                cy = float(K[1, 2]) if K is not None else (height * 0.5)
-
-                self._append_camera_line_once(cam_name, camera_id, width, height, model, fx, fy, cx, cy, dist)
-            except Exception as e:
-                self.get_logger().warning(f'[{cam_name}][CameraInfo] parse failed: {e}')
+            self._ingest_caminfo(cam_name, msg)
         return caminfo_cb
 
     def _make_image_cb(self, cam_name: str):
@@ -387,23 +423,7 @@ class MultiCamOdometryToColmap(Node):
                 buf.append((t, cv_image))
                 while buf and (t - buf[0][0]) > self.buffer_duration:
                     buf.popleft()
-
-                if not self.cam_has_written[cam_name]:
-                    sz = self.cam_size_intr.get(cam_name, {})
-                    width = int(sz.get('width', cv_image.shape[1]))
-                    height = int(sz.get('height', cv_image.shape[0]))
-                    K = sz.get('K', None)
-                    dist = sz.get('dist', None)
-                    model = self.cam_models.get(cam_name, 'PINHOLE')
-                    if K is None:
-                        fx = fy = 500.0
-                        cx = width * 0.5
-                        cy = height * 0.5
-                    else:
-                        fx = float(K[0, 0]); fy = float(K[1, 1]); cx = float(K[0, 2]); cy = float(K[1, 2])
-                    camera_id = next(c['camera_id'] for c in self.cams if c['name'] == cam_name)
-                    self._append_camera_line_once(cam_name, camera_id, width, height, model, fx, fy, cx, cy, dist)
-
+                # 임시 K/임시 cameras.txt 기록은 하지 않음 (요구사항)
             except Exception as e:
                 self.get_logger().error(f'[{cam_name}][Image] Conversion error: {e}')
         return image_cb
@@ -412,7 +432,6 @@ class MultiCamOdometryToColmap(Node):
 
     def odom_cb(self, msg: Odometry):
         try:
-            # 프로젝트 좌표계 맞춤 예시(필요 시 수정)
             x = float(msg.pose.pose.position.x)
             y = float(msg.pose.pose.position.y)
             z = float(msg.pose.pose.position.z)
@@ -460,6 +479,22 @@ class MultiCamOdometryToColmap(Node):
         if best is None or best_abs > tol:
             return None
         return best
+
+    def _undistort_if_needed(self, cam_name: str, img: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+        """필요 시 undistort된 이미지와 사용된 K를 반환. 아니면 원본과 K_used."""
+        params = self.cam_param.get(cam_name, {})
+        if not params:
+            # 파라미터가 없으면 사용 금지 로직(REQUIRE_CAMINFO_BEFORE_WRITE로 커버), 여기는 fall-back
+            return img, np.array([[500.0, 0, img.shape[1]*0.5],
+                                  [0, 500.0, img.shape[0]*0.5],
+                                  [0, 0, 1]], dtype=np.float64)
+        if params.get('undistort', False) and (params.get('map1') is not None):
+            und = cv2.remap(img, params['map1'], params['map2'], interpolation=cv2.INTER_LINEAR,
+                            borderMode=cv2.BORDER_CONSTANT)
+            return und, params['K_used']
+        else:
+            return img, params['K_used']
+
     def _save_for_all_cams(self, odom_time: float, R_wb: np.ndarray, t_wb: np.ndarray) -> bool:
         """
         모든 카메라에 대해, odom_time에 가장 가까운 이미지를 찾아 저장하고
@@ -473,7 +508,7 @@ class MultiCamOdometryToColmap(Node):
             [0.0,  0.0, -1.0],
             [1.0,  0.0,  0.0]
         ], dtype=np.float64)
-    
+
         saved_any = False
         for c in self.cams:
             name = c['name']
@@ -481,7 +516,14 @@ class MultiCamOdometryToColmap(Node):
             t_bc = c['t_bc']
             q_bc = normalize_quat_xyzw(c['q_bc'])
             buf = self.img_buffers[name]
-    
+
+            # CameraInfo 준비 여부 체크
+            if REQUIRE_CAMINFO_BEFORE_WRITE:
+                params = self.cam_param.get(name, None)
+                if not params or 'K_used' not in params:
+                    self.get_logger().warning(f"[{name}] Skip save: CameraInfo not ready yet.")
+                    continue
+
             # 1) 타임스탬프 매칭
             match = self._find_best_image(buf, odom_time, self.match_tolerance)
             if match is None:
@@ -498,61 +540,78 @@ class MultiCamOdometryToColmap(Node):
             skew = t_img - odom_time
             if abs(skew) > 0:
                 self.get_logger().info(f"[{name}][Match] use t={t_img:.6f} (skew {skew*1000:.1f} ms)")
-    
+
             # 2) body->camera 회전
             R_bc = quat_to_R(q_bc[0], q_bc[1], q_bc[2], q_bc[3])
-    
+
             # 3) 카메라 중심(world)과 world->camera 포즈 (ENU 기준)
             C_w = (R_wb @ t_bc + t_wb)
             R_cw = (R_wb @ R_bc).T
             t_cw = - R_cw @ C_w
-    
+
             # 4) Optical 프레임으로 변환
             R_cw_opt = R_OC @ R_cw
             t_cw_opt = R_OC @ t_cw
-    
+
             # 5) 쿼터니언 재계산 (행렬 -> [x,y,z,w])
             q_cw_xyzw_opt = R_to_quat(R_cw_opt)
             qw = float(q_cw_xyzw_opt[3])
             qx = float(q_cw_xyzw_opt[0])
             qy = float(q_cw_xyzw_opt[1])
             qz = float(q_cw_xyzw_opt[2])
-    
-            # 6) 파일명 생성(충돌 회피)
+
+            # 6) 필요 시 undistort 적용
+            img_to_write, K_used = self._undistort_if_needed(name, img)
+
+            # cameras.txt 라인이 아직 안 써졌고, REQUIRE_CAMINFO_BEFORE_WRITE=False 라면
+            # 여기서라도 한 번 써줄 수 있지만, 우리는 CameraInfo 시점에만 쓰도록 설계했음.
+            # 안전하게 재확인:
+            if not self.cam_has_written[name]:
+                params_now = self.cam_param.get(name, None)
+                if params_now and 'K_used' in params_now:
+                    width = int(params_now['width']); height = int(params_now['height'])
+                    self._append_camera_line_once(name, camera_id, width, height, params_now['K_used'], params_now.get('dist'))
+                else:
+                    # 이 경우는 REQUIRE_CAMINFO_BEFORE_WRITE=False 이고 파라미터가 없는 특수 케이스일 수 있으나
+                    # 본 구현에선 저장도 안 하므로 도달하지 않음.
+                    self.get_logger().warning(f"[{name}] cameras.txt not written due to missing params.")
+                    continue
+
+            # 7) 파일명 생성(충돌 회피)
             img_name = f'{name}_image_{self.image_id_counter:06d}.png'
             img_path = os.path.join(self.img_dir, img_name)
             while os.path.exists(img_path):
                 self.image_id_counter += 1
                 img_name = f'{name}_image_{self.image_id_counter:06d}.png'
                 img_path = os.path.join(self.img_dir, img_name)
-    
-            # 7) 이미지 저장
+
+            # 8) 이미지 저장
             try:
-                ok = cv2.imwrite(img_path, img)
+                ok = cv2.imwrite(img_path, img_to_write)
                 if not ok:
                     self.get_logger().error(f'[{name}][FS] OpenCV failed to write: {img_path}')
                     continue
             except Exception as e:
                 self.get_logger().error(f'[{name}][FS] Exception writing image {img_path}: {e}')
                 continue
-    
-            # 8) images.txt append (COLMAP format, Optical 기준의 world->camera)
+
+            # 9) images.txt append (COLMAP format, Optical 기준의 world->camera)
             try:
                 line1 = (f"{self.image_id_counter} "
                          f"{qw:.17g} {qx:.17g} {qy:.17g} {qz:.17g} "
                          f"{t_cw_opt[0]:.17g} {t_cw_opt[1]:.17g} {t_cw_opt[2]:.17g} "
                          f"{camera_id} {img_name}\n")
                 line2 = "\n"
-    
+
                 with self.file_lock:
                     with open(self.images_txt, 'a') as f:
-                        f.write(line1); f.write(line2)    
-                        f.flush(); os.fsync(f.fileno())    
-    
+                        f.write(line1); f.write(line2)
+                        f.flush(); os.fsync(f.fileno())
+
                 self.get_logger().info(f"[COLMAP] Saved IMAGE_ID={self.image_id_counter} ({name}) -> {img_name}")
                 self.image_id_counter += 1
                 saved_any = True
-    
+
             except Exception as e:
                 self.get_logger().error(f'[{name}][FS] Failed to append to {self.images_txt}: {e}')
                 try:
@@ -562,7 +621,7 @@ class MultiCamOdometryToColmap(Node):
                 except Exception as e2:
                     self.get_logger().error(f'[{name}][Rollback] Failed to remove {img_path}: {e2}')
                 continue
-    
+
         return saved_any
 
 

@@ -209,6 +209,15 @@ def main(local_rank: int, world_rank, world_size: int, args):
         output_dir=Path(args.output_dir),
         mode="rendering",
     )
+    server.scene.world_axes.visible = True
+    gui_up = server.gui.add_vector3(
+        "Up Direction",
+        initial_value=(0.0, 0.0, 1.0),
+        step=0.01,
+    )
+    
+    server.scene.set_up_direction((0,0,-1))
+    
     print("Viewer running... Ctrl+C to exit.")
     time.sleep(100000)
 

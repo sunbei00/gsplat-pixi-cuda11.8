@@ -169,7 +169,7 @@ class MultiCamOdometryToColmap(Node):
 
         # ===== 저장 트리거/버퍼 =====
         self.buffer_duration = 1.5          # 각 카메라 이미지 버퍼 유지 [s]
-        self.translation_threshold = 0.4     # 저장 트리거: 변위 [m]
+        self.translation_threshold = 0.001 #0.4     # 저장 트리거: 변위 [m]
         self.rotation_threshold_rad = 0.30   # 저장 트리거: 회전 [rad]
         self.match_tolerance = 0.050         # 타임스탬프 매칭 허용오차 [s]
 
@@ -503,6 +503,7 @@ class MultiCamOdometryToColmap(Node):
         파일에 쓸 때 Optical(우 x, 아래 y, 앞 z; REP-103)로 변환한다.
         """
         # ENU -> Optical 고정 회전
+         # R_.OC
         R_OC = np.array([
             [0.0, -1.0,  0.0],
             [0.0,  0.0, -1.0],
@@ -578,7 +579,7 @@ class MultiCamOdometryToColmap(Node):
                     continue
 
             # 7) 파일명 생성(충돌 회피)
-            img_name = f'{name}_image_{self.image_id_counter:06d}.png'
+            img_name = f'{self.image_id_counter:06d}_{name}_image.png'
             img_path = os.path.join(self.img_dir, img_name)
             while os.path.exists(img_path):
                 self.image_id_counter += 1

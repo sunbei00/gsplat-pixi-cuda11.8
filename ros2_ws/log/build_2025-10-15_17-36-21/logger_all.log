@@ -1,0 +1,146 @@
+[0.057s] [34mcolcon[0m [1;30mDEBUG[0m [32mCommand line arguments: ['/root/code/.pixi/envs/ros/bin/colcon', 'build', '--symlink'][0m
+[0.057s] [34mcolcon[0m [1;30mDEBUG[0m [32mParsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='sequential', event_handlers=None, base_paths=['.'], paths=None, cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=CustomArgumentParser(prog='colcon build', usage=None, description='Build a set of packages.', formatter_class=<class 'colcon_core.command.CustomFormatter'>, conflict_handler='error', add_help=True), verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f2d2efc3bb0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f2d2efc3bb0>>)[0m
+[0.129s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) check parameters
+[0.129s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) check parameters
+[0.129s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) discover
+[0.129s] [34mcolcon.colcon_core.package_discovery[0m [1;30mINFO[0m Crawling recursively for packages in '/root/code/ros2_ws'
+[0.130s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.130s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore'
+[0.130s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore_ament_install'
+[0.130s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ros']
+[0.130s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ros'
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['cmake', 'python']
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'cmake'
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python'
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['python_setup_py']
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python_setup_py'
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extension 'ignore'
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) ignored
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extension 'ignore'
+[0.143s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) ignored
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extension 'ignore'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) ignored
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ignore'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ignore_ament_install'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['ros']
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ros'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['cmake', 'python']
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'cmake'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'python'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['python_setup_py']
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'python_setup_py'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/GSImageSampler) by extensions ['ignore', 'ignore_ament_install']
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/GSImageSampler) by extension 'ignore'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/GSImageSampler) by extension 'ignore_ament_install'
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/GSImageSampler) by extensions ['ros']
+[0.144s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/GSImageSampler) by extension 'ros'
+[0.146s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/GSImageSampler' with type 'ros.ament_python' and name 'GSImageSampler'[0m
+[0.146s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/LIO-SAM-ROS2-REFACTORING) by extensions ['ignore', 'ignore_ament_install']
+[0.146s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/LIO-SAM-ROS2-REFACTORING) by extension 'ignore'
+[0.146s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/LIO-SAM-ROS2-REFACTORING) by extension 'ignore_ament_install'
+[0.146s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/LIO-SAM-ROS2-REFACTORING) by extensions ['ros']
+[0.146s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/LIO-SAM-ROS2-REFACTORING) by extension 'ros'
+[0.146s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/LIO-SAM-ROS2-REFACTORING' with type 'ros.ament_cmake' and name 'lio_sam'[0m
+[0.146s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) using defaults
+[0.146s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) discover
+[0.146s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) using defaults
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'cmake_args' from command line to 'None'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'cmake_target' from command line to 'None'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'cmake_clean_cache' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'cmake_clean_first' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'cmake_force_configure' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'ament_cmake_args' from command line to 'None'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'catkin_cmake_args' from command line to 'None'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'GSImageSampler' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'GSImageSampler' with the following arguments: {'ament_cmake_args': None, 'build_base': '/root/code/ros2_ws/build/GSImageSampler', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/root/code/ros2_ws/install/GSImageSampler', 'merge_install': False, 'path': '/root/code/ros2_ws/src/GSImageSampler', 'symlink_install': True, 'test_result_base': None}[0m
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'cmake_args' from command line to 'None'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'cmake_target' from command line to 'None'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'cmake_clean_cache' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'cmake_clean_first' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'cmake_force_configure' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'ament_cmake_args' from command line to 'None'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'catkin_cmake_args' from command line to 'None'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'lio_sam' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.166s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'lio_sam' with the following arguments: {'ament_cmake_args': None, 'build_base': '/root/code/ros2_ws/build/lio_sam', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/root/code/ros2_ws/install/lio_sam', 'merge_install': False, 'path': '/root/code/ros2_ws/src/LIO-SAM-ROS2-REFACTORING', 'symlink_install': True, 'test_result_base': None}[0m
+[0.166s] [34mcolcon.colcon_core.executor[0m [1;30mINFO[0m Executing jobs using 'sequential' executor
+[0.167s] [34mcolcon.colcon_core.executor.sequential[0m [1;30mDEBUG[0m [32mrun_until_complete 'GSImageSampler'[0m
+[0.167s] [34mcolcon.colcon_ros.task.ament_python.build[0m [1;30mINFO[0m Building ROS package in '/root/code/ros2_ws/src/GSImageSampler' with build type 'ament_python'
+[0.167s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('GSImageSampler', 'ament_prefix_path')
+[0.168s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.168s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/hook/ament_prefix_path.dsv'
+[0.168s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/hook/ament_prefix_path.sh'
+[0.168s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.523s] [34mcolcon.colcon_core.task.python.build[0m [1;30mINFO[0m Building Python package in '/root/code/ros2_ws/src/GSImageSampler'
+[0.523s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.982s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/share/ament_index/resource_index/packages/GSImageSampler[0m
+[0.982s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/package.xml[0m
+[0.982s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/config/front_down_calib.json[0m
+[0.982s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/config/left_calib.json[0m
+[0.982s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/config/back_calib.json[0m
+[0.982s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/config/TF.txt[0m
+[0.982s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/config/right_calib.json[0m
+[0.982s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/config/front_up_calib.json[0m
+[0.983s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/lib/GSImageSampler/kimm_sampler[0m
+[0.983s] [34mcolcon.colcon_core.task.python.build[0m [1;30mDEBUG[0m [32mWhile undoing a previous installation files outside the Python library path are being ignored: /root/code/ros2_ws/install/GSImageSampler/lib/GSImageSampler/sampler[0m
+[0.983s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/root/code/ros2_ws/build/GSImageSampler': CONDA_ENV_SHLVL_2_PIXI_PROMPT=(gs:ros) PIXI_PROMPT=(gs:ros) PYTHONPATH=/root/code/ros2_ws/build/GSImageSampler/prefix_override:/root/code/.pixi/envs/ros/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/root/code/ros2_ws/install/GSImageSampler/lib/python3.10/site-packages:${PYTHONPATH} /root/code/.pixi/envs/ros/bin/python3.10 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /root/code/ros2_ws/build/GSImageSampler/build --no-deps symlink_data --force[0m
+[1.926s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('GSImageSampler', 'pythonpath_develop')
+[1.926s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/root/code/ros2_ws/build/GSImageSampler/share/GSImageSampler/hook/pythonpath_develop.dsv'
+[1.926s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/root/code/ros2_ws/build/GSImageSampler' returned '0': CONDA_ENV_SHLVL_2_PIXI_PROMPT=(gs:ros) PIXI_PROMPT=(gs:ros) PYTHONPATH=/root/code/ros2_ws/build/GSImageSampler/prefix_override:/root/code/.pixi/envs/ros/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/root/code/ros2_ws/install/GSImageSampler/lib/python3.10/site-packages:${PYTHONPATH} /root/code/.pixi/envs/ros/bin/python3.10 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /root/code/ros2_ws/build/GSImageSampler/build --no-deps symlink_data --force[0m
+[1.926s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/root/code/ros2_ws/build/GSImageSampler/share/GSImageSampler/hook/pythonpath_develop.sh'
+[1.928s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/GSImageSampler' for CMake module files
+[1.928s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/GSImageSampler' for CMake config files
+[1.929s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/GSImageSampler/lib'
+[1.929s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/GSImageSampler/bin'
+[1.929s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/GSImageSampler/lib/pkgconfig/GSImageSampler.pc'
+[1.929s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/GSImageSampler/lib/python3.10/site-packages'
+[1.929s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('GSImageSampler', 'pythonpath')
+[1.929s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/hook/pythonpath.dsv'
+[1.929s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/hook/pythonpath.sh'
+[1.930s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/GSImageSampler/bin'
+[1.930s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(GSImageSampler)
+[1.930s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/package.dsv'
+[1.930s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/root/code/ros2_ws/install/GSImageSampler/share/GSImageSampler/package.sh'
+[1.931s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/root/code/ros2_ws/install/GSImageSampler/share/colcon-core/packages/GSImageSampler)
+[1.931s] [34mcolcon.colcon_core.executor.sequential[0m [1;30mDEBUG[0m [32mrun_until_complete 'GSImageSampler' finished with '0'[0m
+[1.931s] [34mcolcon.colcon_core.executor.sequential[0m [1;30mDEBUG[0m [32mrun_until_complete 'lio_sam'[0m
+[1.931s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/root/code/ros2_ws/src/LIO-SAM-ROS2-REFACTORING' with build type 'ament_cmake'
+[1.931s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/root/code/ros2_ws/src/LIO-SAM-ROS2-REFACTORING'
+[1.931s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[1.935s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/root/code/ros2_ws/build/lio_sam': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/code/.pixi/envs/ros CONDA_ENV_SHLVL_2_PIXI_PROMPT=(gs:ros) PIXI_PROMPT=(gs:ros) /root/code/.pixi/envs/ros/bin/cmake /root/code/ros2_ws/src/LIO-SAM-ROS2-REFACTORING -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/root/code/ros2_ws/install/lio_sam[0m
+[4.618s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/root/code/ros2_ws/build/lio_sam' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/code/.pixi/envs/ros CONDA_ENV_SHLVL_2_PIXI_PROMPT=(gs:ros) PIXI_PROMPT=(gs:ros) /root/code/.pixi/envs/ros/bin/cmake /root/code/ros2_ws/src/LIO-SAM-ROS2-REFACTORING -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/root/code/ros2_ws/install/lio_sam[0m
+[4.619s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/root/code/ros2_ws/build/lio_sam': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/code/.pixi/envs/ros CONDA_ENV_SHLVL_2_PIXI_PROMPT=(gs:ros) PIXI_PROMPT=(gs:ros) /root/code/.pixi/envs/ros/bin/cmake --build /root/code/ros2_ws/build/lio_sam -- -j12 -l12[0m
+[4.649s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/root/code/ros2_ws/build/lio_sam' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/code/.pixi/envs/ros CONDA_ENV_SHLVL_2_PIXI_PROMPT=(gs:ros) PIXI_PROMPT=(gs:ros) /root/code/.pixi/envs/ros/bin/cmake --build /root/code/ros2_ws/build/lio_sam -- -j12 -l12[0m
+[4.709s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(lio_sam)
+[4.709s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/lio_sam' for CMake module files
+[4.710s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/lio_sam' for CMake config files
+[4.710s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('lio_sam', 'cmake_prefix_path')
+[4.710s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/root/code/ros2_ws/install/lio_sam/share/lio_sam/hook/cmake_prefix_path.dsv'
+[4.710s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/root/code/ros2_ws/install/lio_sam/share/lio_sam/hook/cmake_prefix_path.sh'
+[4.711s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/lio_sam/lib'
+[4.711s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('lio_sam', 'ld_library_path_lib')
+[4.711s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/root/code/ros2_ws/install/lio_sam/share/lio_sam/hook/ld_library_path_lib.dsv'
+[4.711s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/root/code/ros2_ws/install/lio_sam/share/lio_sam/hook/ld_library_path_lib.sh'
+[4.711s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/lio_sam/bin'
+[4.711s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/lio_sam/lib/pkgconfig/lio_sam.pc'
+[4.712s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/lio_sam/lib/python3.10/site-packages'
+[4.712s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('lio_sam', 'pythonpath')
+[4.712s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/root/code/ros2_ws/install/lio_sam/share/lio_sam/hook/pythonpath.dsv'
+[4.712s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/root/code/ros2_ws/install/lio_sam/share/lio_sam/hook/pythonpath.sh'
+[4.712s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/root/code/ros2_ws/install/lio_sam/bin'
+[4.712s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/root/code/ros2_ws/install/lio_sam/share/lio_sam/package.dsv'
+[4.713s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/root/code/ros2_ws/install/lio_sam/share/lio_sam/package.sh'
+[4.713s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/root/code/ros2_ws/install/lio_sam/share/colcon-core/packages/lio_sam)
+[4.713s] [34mcolcon.colcon_core.executor.sequential[0m [1;30mDEBUG[0m [32mrun_until_complete 'lio_sam' finished with '2'[0m
+[4.713s] [34mcolcon.colcon_core.executor.sequential[0m [1;30mDEBUG[0m [32mclosing loop[0m
+[4.713s] [34mcolcon.colcon_core.executor.sequential[0m [1;30mDEBUG[0m [32mloop closed[0m
+[4.713s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoining thread[0m
+[4.714s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoined thread[0m
+[4.714s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/root/code/ros2_ws/install/local_setup.sh'
+[4.714s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/root/code/ros2_ws/install/_local_setup_util_sh.py'
+[4.715s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/root/code/ros2_ws/install/setup.sh'

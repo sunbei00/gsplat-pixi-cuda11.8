@@ -9,7 +9,7 @@
 /root/code/ros2_ws/build/lio_sam/CMakeFiles/lio_sam__rosidl_typesupport_fastrtps_cpp.dir
 /root/code/ros2_ws/build/lio_sam/CMakeFiles/lio_sam__rosidl_typesupport_introspection_cpp.dir
 /root/code/ros2_ws/build/lio_sam/CMakeFiles/lio_sam__rosidl_typesupport_cpp.dir
-/root/code/ros2_ws/build/lio_sam/CMakeFiles/ament_cmake_python_copy_lio_sam.dir
+/root/code/ros2_ws/build/lio_sam/CMakeFiles/ament_cmake_python_symlink_lio_sam.dir
 /root/code/ros2_ws/build/lio_sam/CMakeFiles/ament_cmake_python_build_lio_sam_egg.dir
 /root/code/ros2_ws/build/lio_sam/CMakeFiles/lio_sam__rosidl_generator_py.dir
 /root/code/ros2_ws/build/lio_sam/CMakeFiles/lio_sam__rosidl_typesupport_fastrtps_c__pyext.dir

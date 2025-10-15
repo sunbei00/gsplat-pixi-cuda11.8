@@ -79,15 +79,23 @@ def main():
         "--database_path", str(db_path),
         "--image_path", str(image_path),
     ])
+    
+    common = [
+    "--database_path", str(db_path),
+    # 기하 검증/가이드 옵션
+    "--SiftMatching.guided_matching", "1",
+    "--SiftMatching.min_num_inliers", "20",     # 데이터에 따라 15~30 조절
+    "--SiftMatching.max_error", "4",            # 픽셀 단위, 2~6 사이 탐색
+    "--SiftMatching.max_num_matches", "32768",  # 풍부한 텍스처면 늘려두면 유리
+]
 
     # 3) 매칭
     if args.matcher == "exhaustive":
-        run(["colmap", "exhaustive_matcher", "--database_path", str(db_path)])
+        run(["colmap", "exhaustive_matcher", *common])
     elif args.matcher == "sequential":
-        run(["colmap", "sequential_matcher",
-             "--database_path", str(db_path)])
+        run(["colmap", "sequential_matcher", *common])
     else:
-        run(["colmap", "vocab_tree_matcher", "--database_path", str(db_path)])
+        run(["colmap", "vocab_tree_matcher", *common])
 
     # 4) known poses로 삼각화
     out_sparse.mkdir(parents=True, exist_ok=True)
@@ -101,6 +109,7 @@ def main():
         # "--Mapper.ba_refine_focal_length", "0",
         # "--Mapper.ba_refine_principal_point", "0",
         # "--Mapper.ba_refine_extra_params", "0",
+        #"--Mapper.ba_global_max_num_iterations", "0",
     ])
 
     # 5) (옵션) TXT 덤프
